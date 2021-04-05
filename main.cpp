@@ -20,7 +20,6 @@ bool check_file_dir(const char* path, const char* file_dir_name) {
             file_dir_found = true;
             break;
         }
-        // std::cout << entry->d_name << std::endl;
     }
     closedir(dir);
 
@@ -47,7 +46,7 @@ bool initilaize_repo(const char* argv1) {
         /** check if repo is already initialized */
         if (check_file_dir(pwd_char, ".trek")) {
             std::cout << "A repository is already initialized here" << std::endl;
-            return true;
+            return EXIT_SUCCESS;
         }
         std::string data_store = ".trek";
         std::vector<std::string> parts_of_path;
