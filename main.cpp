@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <sys/types.h>
+#include "utils.h"
 
 struct commit {
     char* tree;
@@ -79,18 +80,31 @@ bool initilaize_repo(const char* argv1) {
         bool refs_dir_created = create_directory(refs_dir_path);
         if (!refs_dir_created) return EXIT_FAILURE;
 
-        /** creating a .trek/refs/head file in .trek/refs */
+        /** creating a .trek/refs/REFS file in .trek/refs */
         std::string refs_filename = "REFS";
         parts_of_path.push_back(refs_filename);
         std::string refs_file_path = join(pwd, parts_of_path);
-        std::cout << refs_file_path << std::endl;
         bool refs_file_created = create_file(refs_file_path);
         if (!refs_file_created) return EXIT_FAILURE;
+
+        parts_of_path.pop_back();
+        parts_of_path.pop_back();
+
+        /** creating a .trek/refs/index file in .trek/index */
+        std::string index_filename = "index";
+        parts_of_path.push_back(index_filename);
+        std::string index_file_path = join(pwd, parts_of_path);
+        bool index_file_created = create_file(index_file_path);
+        if (!index_file_created) return EXIT_FAILURE;
 
         std::cout << "Initiliazed a trek repository in " << get_current_dir_name() << std::endl;
     }
 
     return EXIT_SUCCESS;
+}
+
+bool stage_entities() {
+    return true;
 }
 
 bool commit_changes() {
