@@ -63,7 +63,7 @@ bool initilaize_repo(const char* argv1) {
         bool data_store_container_created = create_directory(data_store_path);
         if (!data_store_container_created) return EXIT_FAILURE;
 
-        /** creating the object directory inside .trek to keep commits */
+        /** creating the .terk/object directory inside .trek to keep commits */
         std::string object_dir_name = "objects";
         parts_of_path.push_back(object_dir_name);
         std::string object_dir_path = join(pwd, parts_of_path);
@@ -72,12 +72,20 @@ bool initilaize_repo(const char* argv1) {
 
         parts_of_path.pop_back();
 
-        /** creating the refs directory to keep track of references */
+        /** creating the .trek/refs directory to keep track of references */
         std::string refs_dir_name = "refs";
         parts_of_path.push_back(refs_dir_name);
         std::string refs_dir_path = join(pwd, parts_of_path);
         bool refs_dir_created = create_directory(refs_dir_path);
         if (!refs_dir_created) return EXIT_FAILURE;
+
+        /** creating a .trek/refs/head file in .trek/refs */
+        std::string refs_filename = "REFS";
+        parts_of_path.push_back(refs_filename);
+        std::string refs_file_path = join(pwd, parts_of_path);
+        std::cout << refs_file_path << std::endl;
+        bool refs_file_created = create_file(refs_file_path);
+        if (!refs_file_created) return EXIT_FAILURE;
 
         std::cout << "Initiliazed a trek repository in " << get_current_dir_name() << std::endl;
     }
@@ -85,9 +93,17 @@ bool initilaize_repo(const char* argv1) {
     return EXIT_SUCCESS;
 }
 
+bool commit_changes() {
+    return false;
+}
+
 
 int main(int argc, char** argv) {
     initilaize_repo(argv[1]);
+
+    // std::string pwd = get_current_dir_name();
+    // std::cout << pwd.append("/.trek/refs/REFS") << std::endl;
+    // bool c = create_file(pwd.append("/.trek/refs/REFS"));
 
     return EXIT_SUCCESS;
 }

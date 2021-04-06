@@ -16,6 +16,6 @@ bool create_directory(std::string& path);
  * Takes file name as parameter and creates a file in present
  * working directory.
 */
-void create_file(std::string& file_name);
+bool create_file(std::string& file_name);
 
 #endif /* FS_H */

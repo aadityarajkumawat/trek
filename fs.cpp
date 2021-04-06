@@ -1,6 +1,7 @@
 #include "fs.h"
 #include <iostream>
 #include <string>
+#include <fstream>
 
 bool create_directory(std::string& path) {
     const char* type_safe_path = path.c_str();
@@ -10,16 +11,13 @@ bool create_directory(std::string& path) {
     return true;
 }
 
-void create_file(std::string& file_name) {
+bool create_file(std::string& file_name) {
     std::fstream file;
     file.open(file_name, std::ios::out);
 
     if (!file) {
-        std::cout << "Error in creating file!!" << std::endl;
-        return;
+        return false;
     }
-
-    std::cout << "File created successfully" << std::endl;
     file.close();
-    return;
+    return true;
 }
