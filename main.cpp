@@ -101,7 +101,53 @@ bool initilaize_repo() {
     return EXIT_SUCCESS;
 }
 
-bool stage_entities(char** argv) {
+bool write_to_file(std::string& file_name, std::string& content) {
+    std::fstream file;
+    file.open(file_name, std::ios::app);
+
+    if (!file) {
+        return false;
+    }
+    else {
+        file << content;
+        file.close();
+        return false;
+    }
+}
+
+bool stage_entities(int argc, char** argv) {
+    if (argc == 2) {
+        std::cout << "Error: trek add <filename>, <filename> is missing" << std::endl;
+        return false;
+    }
+
+    if (!strcmp(argv[2], ".")) {
+        const char* pwd = get_current_dir_name();
+
+        struct dirent* entry;
+        DIR* dir = opendir(pwd);
+
+        if (dir == NULL) return false;
+
+        while ((entry = readdir(dir)) != NULL) {
+            // std::cout << entry->d_name << "->" << entry->d_name[0] << std::endl;
+            const char* entity_name = entry->d_name;
+            // const char* e = entity_nam;
+
+            // std::cout << e << std::endl;
+
+            std::string s = entry->d_name;
+            s = s + "\n";
+
+            // if (strcmp(e, ".")) {
+            //     std::string pwd_str = get_current_dir_name();
+            //     std::string ss = "test.txt";
+            //     bool b = write_to_file(ss, s);
+            // }
+        }
+        closedir(dir);
+    }
+
     return true;
 }
 
@@ -114,8 +160,12 @@ int main(int argc, char** argv) {
         initilaize_repo();
     }
     else if (!strcmp(argv[1], "add")) {
-        stage_entities(argv);
+        stage_entities(argc, argv);
     }
+
+    // std::string n = "test.txt";
+    // std::string cont = "\ncool";
+    // bool f = write_to_file(n, cont);
 
     // std::string pwd = get_current_dir_name();
     // std::cout << pwd.append("/.trek/refs/REFS") << std::endl;

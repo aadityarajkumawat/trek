@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <bits/stdc++.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -17,5 +18,11 @@ bool create_directory(std::string& path);
  * working directory.
 */
 bool create_file(std::string& file_name);
+
+/**
+ * Appends content to a file, takes file name and contents
+ * as parameters respectively.
+*/
+// bool write_to_file(std::string file_name, std::string content);
 
 #endif /* FS_H */

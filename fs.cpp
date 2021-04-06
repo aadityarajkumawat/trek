@@ -21,3 +21,17 @@ bool create_file(std::string& file_name) {
     file.close();
     return true;
 }
+
+// bool write_to_file(std::string& file_name, std::string& content) {
+//     std::fstream file;
+//     file.open(file_name, std::ios::app);
+
+//     if (!file) {
+//         return false;
+//     }
+//     else {
+//         file << content;
+//         file.close();
+//         return false;
+//     }
+// }
