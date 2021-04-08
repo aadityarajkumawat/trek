@@ -1,8 +1,11 @@
 utils.h
+init.o
+init.h
 utils.cpp
 main.o
 path.cpp
 test.cpp
+init.cpp
 cmd-args.cpp
 a.out
 test

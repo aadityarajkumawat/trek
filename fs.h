@@ -23,6 +23,6 @@ bool create_file(std::string& file_name);
  * Appends content to a file, takes file name and contents
  * as parameters respectively.
 */
-// bool write_to_file(std::string file_name, std::string content);
+bool write_to_file(std::string& file_name, std::string& content);
 
 #endif /* FS_H */
