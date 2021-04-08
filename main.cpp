@@ -130,20 +130,21 @@ bool stage_entities(int argc, char** argv) {
         if (dir == NULL) return false;
 
         while ((entry = readdir(dir)) != NULL) {
-            // std::cout << entry->d_name << "->" << entry->d_name[0] << std::endl;
             const char* entity_name = entry->d_name;
-            // const char* e = entity_nam;
+            std::string entity_name_str = entity_name;
 
-            // std::cout << e << std::endl;
+            char k = entity_name_str[0];
+            std::string kk(1, k);
+            const char* first = kk.c_str();
 
             std::string s = entry->d_name;
             s = s + "\n";
 
-            // if (strcmp(e, ".")) {
-            //     std::string pwd_str = get_current_dir_name();
-            //     std::string ss = "test.txt";
-            //     bool b = write_to_file(ss, s);
-            // }
+            if (strcmp(first, ".")) {
+                std::string pwd_str = get_current_dir_name();
+                std::string ss = "test.txt";
+                bool b = write_to_file(ss, s);
+            }
         }
         closedir(dir);
     }
