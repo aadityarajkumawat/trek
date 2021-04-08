@@ -33,3 +33,15 @@ bool check_file_dir(const char* path, const char* file_dir_name) {
 
     return file_dir_found;
 }
+
+bool find_string_in_vector(std::vector<std::string>& strings, std::string str_to_find) {
+    bool b = false;
+    for (std::string& str : strings) {
+        if (str_to_find == str) {
+            b = true;
+            break;
+        }
+    }
+
+    return b;
+}
