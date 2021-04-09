@@ -19,5 +19,6 @@ main.cpp/
 path.h/
 utils.o/
 makefile/
-smallpp.js/
-server.js/
+stage.cpp/
+stage.h/
+stage.o/
