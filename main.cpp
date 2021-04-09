@@ -41,6 +41,22 @@ std::vector<std::string> get_staged_files() {
     return file_names;
 }
 
+std::vector<std::string> get_dir_files(const char* path) {
+    struct dirent* entry;
+    std::vector<std::string> c;
+    DIR* dir = opendir(path);
+
+    if (dir == NULL) return {};
+
+    while ((entry = readdir(dir)) != NULL) {
+        std::string cc = entry->d_name;
+        c.push_back(cc);
+    }
+    closedir(dir);
+
+    return c;
+}
+
 bool stage_entities(int argc, char** argv) {
     if (argc == 2) {
         std::cout << "Error: trek add <filename>, <filename> is missing" << std::endl;
@@ -55,22 +71,11 @@ bool stage_entities(int argc, char** argv) {
 
         if (dir == NULL) return false;
 
-        std::vector<std::string> stages_files = get_staged_files();
+        std::vector<std::string> staged_files = get_staged_files();
 
         while ((entry = readdir(dir)) != NULL) {
             const char* entity_name = entry->d_name;
-
-
             std::string entity_name_str = entity_name;
-
-            bool file_is_found = find_string_in_vector(stages_files, entity_name_str);
-
-            // if (file_is_found) {
-            //     std::cout << "f" << std::endl;
-            // }
-            // else {
-            //     std::cout << "nf" << std::endl;
-            // }
 
             char char_0 = entity_name_str[0];
             std::string char0_str(1, char_0);
@@ -79,12 +84,28 @@ bool stage_entities(int argc, char** argv) {
             std::string s = entry->d_name;
             s = s + "/\n";
 
-            if (strcmp(first, ".") && !file_is_found) {
-                std::string pwd_str = get_current_dir_name();
-                std::string ss = "test.txt";
-                bool b = write_to_file(ss, s);
+            if (strcmp(first, ".")) {
+                bool file_is_found = find_string_in_vector(staged_files, entity_name_str);
+
+                if (!file_is_found) {
+                    std::string ss = "test.txt";
+                    std::string f = entity_name_str + "/\n";
+                    bool written = write_to_file(ss, f);
+                }
             }
         }
+
+        staged_files = get_staged_files();
+        std::vector<std::string> dir_files = get_dir_files(pwd);
+
+        for (std::string& staged_file : staged_files) {
+            bool file_is_found = find_string_in_vector(dir_files, staged_file);
+
+            if (!file_is_found) {
+                
+            }
+        }
+
         closedir(dir);
     }
 
@@ -106,6 +127,7 @@ int main(int argc, char** argv) {
     // std::vector<std::string> file_names = get_staged_files();
 
     // for (std::string& d : file_names) {
+    //     std::cout << "cool" << std::endl;
     //     std::cout << d << std::endl;
     // }
 

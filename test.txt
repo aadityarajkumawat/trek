@@ -19,4 +19,5 @@ main.cpp/
 path.h/
 utils.o/
 makefile/
-fg.yy/
+smallpp.js/
+server.js/
