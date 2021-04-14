@@ -12,7 +12,7 @@
 std::vector<std::string> get_staged_files() {
     std::fstream my_file;
     std::vector<std::string> file_names;
-    my_file.open("test.txt", std::ios::in);
+    my_file.open("./.trek/index", std::ios::in);
     if (!my_file) {
         file_names = {};
         return file_names;
@@ -91,7 +91,7 @@ bool stage_entities(int argc, char** argv) {
                 bool file_is_found = find_string_in_vector(staged_files, entity_name_str);
 
                 if (!file_is_found) {
-                    std::string ss = "test.txt";
+                    std::string ss = "./.trek/index";
                     std::string f = entity_name_str + "/\n";
                     bool written = write_to_file(ss, f);
                 }
