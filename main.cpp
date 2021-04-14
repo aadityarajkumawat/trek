@@ -25,12 +25,5 @@ int main(int argc, char** argv) {
         commit_changes(argc, argv);
     }
 
-    // std::vector<std::string> file_names = get_staged_files();
-
-    // for (std::string& d : file_names) {
-    //     std::cout << "cool" << std::endl;
-    //     std::cout << d << std::endl;
-    // }
-
     return EXIT_SUCCESS;
 }

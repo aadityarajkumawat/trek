@@ -71,10 +71,15 @@ bool stage_entities(int argc, char** argv) {
 
         struct dirent* entry;
         DIR* dir = opendir(pwd);
+        DIR* d = opendir("./pages");
 
         if (dir == NULL) return false;
 
         std::vector<std::string> staged_files = get_staged_files();
+
+        if ((entry = readdir(d)) == NULL) {
+            std::cout << "Dir" << std::endl;
+        }
 
         while ((entry = readdir(dir)) != NULL) {
             const char* entity_name = entry->d_name;
